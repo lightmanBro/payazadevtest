@@ -24,40 +24,41 @@ let config1 = {
   url: 'https://router-live.78financials.com/api/request/secure/payloadhandler',
   headers: { 
     'Authorization': 'Payaza UFo3OC1QS0xJVkUtMEUzRUVCRjYtQjU4Qi00REQyLTlDNzgtOTlEMUU2MTk0NUY4', 
-    'X-TenantID': 'test', 
+    'X-TenantID': 'live', 
     'Content-Type': 'application/json'
   },
   data : data1
 };
 
-axios.request(config1)
-.then((response) => {
-  console.log(JSON.stringify(response.data));
-})
-.catch((error) => {
-  console.log(error);
-});
+// axios.request(config1)
+// .then((response) => {
+//   console.log(JSON.stringify(response.data));
+// })
+// .catch((error) => {
+//   console.log(error);
+// });
 
 // Second POST request configuration
 let data2 = JSON.stringify({
   "transaction_type": "nuban",
+  "service_type":"Payout",
   "service_payload": {
-    "payout_amount": 200,
+    "payout_amount": 180,
     "transaction_pin": 1429,
     "account_reference": "1010000009",
     "currency": "NGN",
     "payout_beneficiaries": [
       {
-        "credit_amount": 100,
+        "credit_amount": 180,
         "account_number": "4030058433",
-        "account_name": "omotoso david",
+        "account_name": "Payaza(David Omotoso)",
         "bank_code": "000031",
         "narration": "dev Test",
         "transaction_reference": "TD93001234",
         "sender": {
-          "sender_name": "David Doe",
-          "sender_id": "LightmanBro",
-          "sender_phone_number": "01234595",
+          "sender_name": "omotoso david",
+          "sender_id": "",
+          "sender_phone_number": "09012345673",
           "sender_address": "123, Ace Street"
         }
       }
@@ -71,35 +72,48 @@ let config2 = {
   url: 'https://router-live.78financials.com/api/request/secure/payloadhandler',
   headers: { 
     'Authorization': 'Payaza UFo3OC1QS0xJVkUtMEUzRUVCRjYtQjU4Qi00REQyLTlDNzgtOTlEMUU2MTk0NUY4', 
-    'X-TenantID': 'test', 
+    'X-TenantID': 'live', 
     'Content-Type': 'application/json'
   },
   data : data2
 };
 
-axios.request(config2)
-.then((response) => {
-  console.log(JSON.stringify(response.data));
-})
-.catch((error) => {
-  console.log(error);
+// axios.request(config2)
+// .then((response) => {
+//   console.log(JSON.stringify(response.data));
+// })
+// .catch((error) => {
+//   console.log(error);
+// });
+
+// Response:{"response_code":201,"response_message":"Something went wrong doing request message integrity check. Please contact customersupport@78financials.com"}
+
+
+let data = JSON.stringify({
+  "service_payload": {
+    "currency": "NGN",
+    "bank_code": "000031",
+    "account_number": "4030058433"
+  }
 });
 
-// GET request configuration
-let config3 = {
-  method: 'get',
+let config = {
+  method: 'post',
   maxBodyLength: Infinity,
-  url: 'https://api.payaza.africa/live/payaza-account/api/v1/mainaccounts/merchant/enquiry/main',
+  url: 'https://api.payaza.africa/live/payaza-account/api/v1/mainaccounts/merchant/provider/enquiry',
   headers: { 
+    'X-TenantID': 'live', 
     'Authorization': 'Payaza UFo3OC1QS0xJVkUtMEUzRUVCRjYtQjU4Qi00REQyLTlDNzgtOTlEMUU2MTk0NUY4', 
-    'X-TenantID': 'test', 
-  }
+    'Content-Type': 'application/json'
+  },
+  data : data
 };
 
-axios.request(config3)
+axios.request(config)
 .then((response) => {
   console.log(JSON.stringify(response.data));
 })
 .catch((error) => {
   console.log(error);
 });
+  
